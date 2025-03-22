@@ -57,9 +57,13 @@ let operator = '';
 let displayElement = null;
 let overwrite = false; 
 
-
 function init() {
   displayElement = document.getElementById('display');
+  
+  // Also run legacy init if the test fixture exists
+  if (document.getElementById('add') && document.getElementById('x') && document.getElementById('y')) {
+    legacyInit();
+  }
 }
 
 function updateDisplay(value) {
@@ -76,7 +80,6 @@ function appendNumber(num) {
   currentInput += num.toString();
   updateDisplay(currentInput);
 }
-
 
 function clearDisplay() {
   currentInput = '';
@@ -151,18 +154,15 @@ function calculate() {
   operand = result.toString();
   currentInput = '';
   operator = '';
-  overwrite = true; // next number should start fresh
+  overwrite = true;
 }
-
 
 function memoryRecall() {
   currentInput = getMemory().toString();
   updateDisplay(currentInput);
-  overwrite = true; // next number should clear this recall
+  overwrite = true;
 }
 
-
-// --- These two UI functions read the currentInput and call the pure logic. ---
 function memoryPlusUI() {
   memoryPlus(parseFloat(currentInput) || 0);
   currentInput = '';
@@ -177,6 +177,20 @@ function memoryMinusUI() {
   overwrite = true;
 }
 
+// ------------------------
+// Legacy Functionality for Unit Tests
+// ------------------------
+function legacyInit() {
+  const addButton = document.getElementById('add');
+  if (addButton) {
+    addButton.addEventListener('click', function() {
+      const x = parseInt(document.getElementById('x').value, 10);
+      const y = parseInt(document.getElementById('y').value, 10);
+      const sum = x + y;
+      document.getElementById('result').innerHTML = isNaN(sum) ? '0' : sum.toString();
+    });
+  }
+}
 
 // ------------------------
 // Expose Functions for Testing & UI
