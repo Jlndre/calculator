@@ -1,4 +1,4 @@
-# UnitTest-2 Calculator Project
+#Calculator Project
 
 This is a simple calculator project with both **unit tests** and **end-to-end (E2E) tests** using **Jasmine/Karma** and **Cypress**.
 
