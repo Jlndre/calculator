@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Minimalist Calculator</title>
+  <script src="lib/calculator.js"></script>
+  <style>
+    /* Basic Minimalist Styling */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+    }
+    #calculator {
+      max-width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    #display {
+      width: 100%;
+      height: 50px;
+      font-size: 1.5rem;
+      text-align: right;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    button {
+      width: 60px;
+      height: 60px;
+      margin: 5px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #e0e0e0;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    button:hover {
+      background-color: #d4d4d4;
+    }
+    #calculator div {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .operator {
+      background-color: #f9a825;
+      color: #fff;
+    }
+    .operator:hover {
+      background-color: #f57f17;
+    }
+    .memory {
+      background-color: #1976d2;
+      color: #fff;
+    }
+    .memory:hover {
+      background-color: #1565c0;
+    }
+    .zero {
+      flex: 1;
+    }
+  </style>
+</head>
+<body onload="window.calculator.init()">
+  <div id="calculator">
+    <input id="display" type="text" readonly>
+
+    <!-- Row 1: Sign, Square Root, Percent, Clear -->
+    <div>
+      <button onclick="window.calculator.changeSign()">+/-</button>
+      <button onclick="window.calculator.squareRoot()">√</button>
+      <button onclick="window.calculator.percent()">%</button>
+      <button onclick="window.calculator.clearDisplay()">ON/C</button>
+    </div>
+
+    <!-- Row 2: Memory Functions & Divide -->
+    <div>
+      <button class="memory" onclick="window.calculator.memoryRecall()">MRC</button>
+      <!-- Updated to call memoryMinusUI -->
+      <button class="memory" onclick="window.calculator.memoryMinusUI()">M-</button>
+      <!-- Updated to call memoryPlusUI -->
+      <button class="memory" onclick="window.calculator.memoryPlusUI()">M+</button>
+      <button class="operator" onclick="window.calculator.divide()">/</button>
+    </div>
+
+    <!-- Row 3: 7, 8, 9, Multiply -->
+    <div>
+      <button onclick="window.calculator.appendNumber(7)">7</button>
+      <button onclick="window.calculator.appendNumber(8)">8</button>
+      <button onclick="window.calculator.appendNumber(9)">9</button>
+      <button class="operator" onclick="window.calculator.multiply()">*</button>
+    </div>
+
+    <!-- Row 4: 4, 5, 6, Subtract -->
+    <div>
+      <button onclick="window.calculator.appendNumber(4)">4</button>
+      <button onclick="window.calculator.appendNumber(5)">5</button>
+      <button onclick="window.calculator.appendNumber(6)">6</button>
+      <button class="operator" onclick="window.calculator.subtract()">-</button>
+    </div>
+
+    <!-- Row 5: 1, 2, 3, Add -->
+    <div>
+      <button onclick="window.calculator.appendNumber(1)">1</button>
+      <button onclick="window.calculator.appendNumber(2)">2</button>
+      <button onclick="window.calculator.appendNumber(3)">3</button>
+      <button class="operator" onclick="window.calculator.add()">+</button>
+    </div>
+
+    <!-- Row 6: 0 and Equals -->
+    <div>
+      <button class="zero" onclick="window.calculator.appendNumber(0)">0</button>
+      <button class="operator" onclick="window.calculator.calculate()">=</button>
+    </div>
+  </div>
+</body>
+</html>
